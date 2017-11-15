@@ -16,4 +16,19 @@ const router = new VueRouter({
   ]
 });
 
+router.beforeEach((to, from, next) => {
+  let expiration = window.localStorage.getItem("tokenExpiration");
+  var unixTimestamp = new Date().getTime() / 1000;
+  if (
+    (expiration === null ||
+      expiration === "null" ||
+      parseInt(expiration) - unixTimestamp < 0) &&
+    to.path !== "/login"
+  ) {
+    next({ path: "/login" });
+  } else {
+    next();
+  }
+});
+
 export default router;
