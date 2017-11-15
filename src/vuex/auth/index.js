@@ -41,7 +41,6 @@ const mutations = {
     state.isAuthenticated = false;
   },
   login(state, token) {
-    console.log(token);
     if (typeof window !== "undefined") {
       window.localStorage.setItem("token", token.token);
       window.localStorage.setItem("tokenExpiration", token.expiration);
