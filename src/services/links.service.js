@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const service = {
-  getAll(page) {
+  getList(paging) {
     return new Promise((resolve, reject) => {
       axios
-        .get("/admin/links", credentials)
+        .get("/links", paging)
         .then(response => {
           resolve(response.data);
         })
