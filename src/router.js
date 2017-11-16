@@ -2,7 +2,12 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 const Login = () => System.import("./pages/Login.vue");
+
+const Categories = () => System.import("./pages/Categories/CategoryList.vue");
+
 const Links = () => System.import("./pages/Links/LinkList.vue");
+const LinkAdd = () => System.import("./pages/Links/LinkAdd.vue");
+
 const NotFound = () => System.import("./theme/NotFound.vue");
 
 Vue.use(VueRouter);
@@ -12,7 +17,9 @@ const router = new VueRouter({
   linkActiveClass: "is-active",
   scrollBehavior: (to, from, savedPosition) => ({ y: 0 }),
   routes: [
+    { path: "/categories", component: Categories },
     { path: "/links", component: Links },
+    { path: "/link/add", component: LinkAdd },
     { path: "/login", component: Login },
     { path: "*", component: NotFound }
   ]

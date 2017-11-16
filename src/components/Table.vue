@@ -2,10 +2,10 @@
   <div>
     <table v-if="items && columns">
       <thead>
-        <th v-for="column in columns">{{column.header}}</th>
+        <th v-for="column in columns"><span v-html="column.header"/></th>
       </thead>
       <tbody>
-        <tr v-for="item in items">
+        <tr v-for="item in items" :class="getRowClass(item)">
           <td v-for="column in columns"><span v-html="getValue(item, column)"></span></td>
         </tr>
       </tbody>
@@ -17,7 +17,8 @@
     data () {
       return {
         columns: [],
-        items: []
+        items: [],
+        getRowClass: function(){}
       }
     },
     methods: {
@@ -31,3 +32,8 @@
     }
   }
 </script>
+<style scoped>
+  tr.inactive {
+   background-color: #eeafb9;
+  }
+</style>

@@ -1,9 +1,64 @@
 <template>
   <div>
-    <a class="button is-primary">Add</a>
-    <a class="button is-success">Active</a>
-    <a class="button is-warning">Inactive</a>
-    <a class="button is-danger">Delete</a>
+    <div class="columns">
+      <div class="column is-narrow">
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span>Actions</span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              <a href="#" class="dropdown-item">
+                Activate
+              </a>
+              <a class="dropdown-item">
+                Disable
+              </a>
+              <a href="#" class="dropdown-item">
+                Delete
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="columns">
+          <div class="column">
+            <input class="input" type="text" placeholder="Title" />
+          </div>
+          <div class="column">
+            <input class="input" type="text" placeholder="Tags" />
+          </div>
+          <div class="column is-narrow">
+            <div class="dropdown is-hoverable">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                  <span>Filter Category</span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <a href="#" class="dropdown-item">
+                    Active
+                  </a>
+                  <a class="dropdown-item">
+                    Inactive
+                  </a>
+                  <a href="#" class="dropdown-item">
+                    Delete
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-narrow">
+        <router-link class="button is-primary" to="/link/add">Add</router-link>
+      </div>
+    </div>
     <dnw-table ref="dnwTable" />
   </div>
 </template>
@@ -45,10 +100,18 @@
       renderInput(item) {
         return `<input type="checkbox" />`;
       },
+      renderCategory(item) {
+        return item.category.name;
+      },
+      getRowClass(item) {
+        if (item && !item.isActive) {
+          return "inactive";
+        }
+      },
       getColumns() {
         return [
           {
-            header: "",
+            header: `<input type="checkbox" />`,
             render: this.renderInput
           },
           {
@@ -65,6 +128,15 @@
             render: this.renderUrl
           },
           {
+            header: "Created",
+            prop: "createdOn"
+          },
+          {
+            header: "Category",
+            prop: "",
+            render: this.renderCategory
+          },
+          {
             header: "",
             prop: "",
             render: this.renderEdit
@@ -73,6 +145,7 @@
       }
     },
     mounted() {
+      Vue.set(this.$refs.dnwTable, 'getRowClass', this.getRowClass);
       Vue.set(this.$refs.dnwTable, 'columns', this.getColumns());
       Vue.set(this.$refs.dnwTable, 'items', this.links);
       this.getList();
