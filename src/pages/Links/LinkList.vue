@@ -1,5 +1,9 @@
 <template>
   <div>
+    <a class="button is-primary">Add</a>
+    <a class="button is-success">Active</a>
+    <a class="button is-warning">Inactive</a>
+    <a class="button is-danger">Delete</a>
     <dnw-table ref="dnwTable" />
   </div>
 </template>
@@ -32,8 +36,21 @@
       ...mapActions('linksModule', {
         getList: 'getList'
       }),
+      renderEdit(item) {
+        return '<a href="">Edit</a>';
+      },
+      renderUrl(item) {
+        return `<a target="_blank" href="${item.url}">${item.url}</a>`;
+      },
+      renderInput(item) {
+        return `<input type="checkbox" />`;
+      },
       getColumns() {
         return [
+          {
+            header: "",
+            render: this.renderInput
+          },
           {
             header: "ID",
             prop: "_id"
@@ -43,20 +60,21 @@
             prop: "title"
           },
           {
-            header: "Content",
-            prop: "content"
+            header: "Url",
+            prop: "url",
+            render: this.renderUrl
           },
           {
-            header: "Url",
-            prop: "url"
+            header: "",
+            prop: "",
+            render: this.renderEdit
           }
         ]
       }
     },
     mounted() {
       Vue.set(this.$refs.dnwTable, 'columns', this.getColumns());
-    },
-    created() {
+      Vue.set(this.$refs.dnwTable, 'items', this.links);
       this.getList();
     }
   }

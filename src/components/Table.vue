@@ -6,7 +6,7 @@
       </thead>
       <tbody>
         <tr v-for="item in items">
-          <td v-for="column in columns">{{getValue(item, column)}}</td>
+          <td v-for="column in columns"><span v-html="getValue(item, column)"></span></td>
         </tr>
       </tbody>
     </table>
