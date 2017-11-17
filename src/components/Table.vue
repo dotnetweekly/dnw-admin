@@ -1,14 +1,10 @@
 <template>
   <div>
-    <table v-if="items && columns">
+    <table v-if="columns">
       <thead>
-        <th v-for="column in columns"><span v-html="column.header"/></th>
+        <slot name="row-header"></slot>
       </thead>
-      <tbody>
-        <tr v-for="item in items" :class="getRowClass(item)">
-          <td v-for="column in columns"><span v-html="getValue(item, column)"></span></td>
-        </tr>
-      </tbody>
+      <slot name="items"></slot>
     </table>
   </div>
 </template>
@@ -16,24 +12,31 @@
   export default {
     data () {
       return {
-        columns: [],
-        items: [],
-        getRowClass: function(){}
-      }
-    },
-    methods: {
-      getValue(item, column) {
-        if(column.hasOwnProperty("render")){
-          return column.render(item);
-        }
-
-        return item[column.prop];
+        columns: []
       }
     }
   }
 </script>
 <style scoped>
-  tr.inactive {
-   background-color: #eeafb9;
+  tbody td{
+    border: 0;
+  }
+
+  tr:hover{
+    background-color: inherit;
+  }
+
+  tbody:hover{
+    background-color: whitesmoke;
+  }
+  tbody.inactive, tbody.inactive:hover {
+   background-color: #f8e6e6 !important;
+  }
+
+  tbody{
+    border: 1px solid #dbdbdb;
+    border-width: 0 0 1px;
+    padding: 0.5em 0.75em;
+    vertical-align: top;
   }
 </style>

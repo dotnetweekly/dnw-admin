@@ -1,85 +1,49 @@
 <template>
   <div>
-    <div class="columns">
-      <div class="column is-narrow">
-        <div class="dropdown is-hoverable">
-          <div class="dropdown-trigger">
-            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span>Actions</span>
-            </button>
-          </div>
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <a href="#" class="dropdown-item">
-                Activate
-              </a>
-              <a class="dropdown-item">
-                Disable
-              </a>
-              <a href="#" class="dropdown-item">
-                Delete
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="columns">
-          <div class="column">
-            <input class="input" type="text" placeholder="Title" />
-          </div>
-          <div class="column">
-            <input class="input" type="text" placeholder="Tags" />
-          </div>
-          <div class="column is-narrow">
-            <div class="dropdown is-hoverable">
-              <div class="dropdown-trigger">
-                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                  <span>Filter Category</span>
-                </button>
-              </div>
-              <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                <div class="dropdown-content">
-                  <a href="#" class="dropdown-item">
-                    Active
-                  </a>
-                  <a class="dropdown-item">
-                    Inactive
-                  </a>
-                  <a href="#" class="dropdown-item">
-                    Delete
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="column is-narrow">
-        <router-link class="button is-primary" to="/link/add">Add</router-link>
-      </div>
-    </div>
-    <dnw-table ref="dnwTable" />
+    <dnw-table-header v-bind:ids="ids"></dnw-table-header>
+    <dnw-table ref="dnwTable">
+      <tr slot="row-header">
+        <th><input v-model="allChecked" v-on:click="checkAll()" type="checkbox" /></th>
+        <th v-for="column in columns"><span v-html="column.header"/></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tbody slot="items" v-for="item in links" :class="getRowClass(item)">
+        <tr>
+          <td><input :value="item._id" type="checkbox" v-model="ids"/></td>
+          <td v-for="column in columns">
+            <span v-html="getValue(item, column)"></span>
+          </td>
+          <td><a href="">Edit</a></td>
+          <td><a v-on:click="toggleMore(item)">More</a></td>
+        </tr>
+        <tr class="showMore" v-if="item.showMore">
+          <td colspan="10">
+            <p>ID: {{item._id}}</p>
+            <p>Status: {{item.isActive}}</p>
+          </td>
+        </tr>
+      </tbody>
+    </dnw-table>
   </div>
 </template>
 <script>
   import Table from '../../components/Table.vue'
+  import TableHeader from './LinkListHeader.vue'
   import Vue from "vue"
   import { mapGetters, mapActions } from "vuex"
 
   export default {
-    components: {
-      'dnw-table': Table
-    },
     data() {
       return {
-        data: ["test", "test2"]
+        columns: this.getColumns(),
+        ids: [],
+        allChecked: false
       }
     },
-    watch: {
-      linksLength(newCount, oldCount) {
-        Vue.set(this.$refs.dnwTable, 'items', this.links);
-      }
+    components: {
+      'dnw-table': Table,
+      'dnw-table-header': TableHeader
     },
     computed: {
       ...mapGetters('linksModule', ['links']),
@@ -91,33 +55,30 @@
       ...mapActions('linksModule', {
         getList: 'getList'
       }),
-      renderEdit(item) {
-        return '<a href="">Edit</a>';
-      },
-      renderUrl(item) {
-        return `<a target="_blank" href="${item.url}">${item.url}</a>`;
-      },
-      renderInput(item) {
-        return `<input type="checkbox" />`;
-      },
-      renderCategory(item) {
-        return item.category.name;
-      },
       getRowClass(item) {
         if (item && !item.isActive) {
           return "inactive";
         }
       },
+      getValue(item, column) {
+        if(column.hasOwnProperty("render")){
+          return column.render(item);
+        }
+
+        return item[column.prop];
+      },
+      renderUrl(item) {
+        return `<a target="_blank" href="${item.url}">${item.url}</a>`;
+      },
+      renderCategory(item) {
+        return item.category.name;
+      },
+      toggleMore(item) {
+        const showMore = item.showMore;
+        Vue.set(item, 'showMore', !showMore);
+      },
       getColumns() {
         return [
-          {
-            header: `<input type="checkbox" />`,
-            render: this.renderInput
-          },
-          {
-            header: "ID",
-            prop: "_id"
-          },
           {
             header: "Title",
             prop: "title"
@@ -135,20 +96,16 @@
             header: "Category",
             prop: "",
             render: this.renderCategory
-          },
-          {
-            header: "",
-            prop: "",
-            render: this.renderEdit
           }
         ]
       }
     },
     mounted() {
-      Vue.set(this.$refs.dnwTable, 'getRowClass', this.getRowClass);
       Vue.set(this.$refs.dnwTable, 'columns', this.getColumns());
-      Vue.set(this.$refs.dnwTable, 'items', this.links);
       this.getList();
     }
   }
 </script>
+<style scoped>
+
+</style>

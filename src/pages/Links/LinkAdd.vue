@@ -33,12 +33,7 @@
 <div class="field">
   <label class="label">Tags</label>
   <div class="control">
-    <div class="select">
-      <select>
-        <option>Select dropdown</option>
-        <option>With options</option>
-      </select>
-    </div>
+    <input class="input" type="text" placeholder="Text input">
   </div>
 </div>
 

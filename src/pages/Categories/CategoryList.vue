@@ -1,77 +1,99 @@
 <template>
   <div>
-    <div class="columns">
-      <div class="column is-narrow">
-        <div class="dropdown is-hoverable">
-          <div class="dropdown-trigger">
-            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span>Actions</span>
-            </button>
-          </div>
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <a href="#" class="dropdown-item" :click="updateStatus()">
-                Activate
-              </a>
-              <a class="dropdown-item">
-                Disable
-              </a>
-              <a href="#" class="dropdown-item">
-                Delete
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-      </div>
-      <div class="column is-narrow">
-        <router-link class="button is-primary" to="/link/add">Add</router-link>
-      </div>
-    </div>
-    <dnw-table ref="dnwTable" />
+    <dnw-table-header v-bind:ids="ids"></dnw-table-header>
+    <dnw-table ref="dnwCategoryTable">
+      <tr slot="row-header">
+        <th><input v-model="allChecked" v-on:click="checkAll()" type="checkbox" /></th>
+        <th v-for="column in columns"><span v-html="column.header"/></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tbody slot="items" v-for="item in categories" :class="getRowClass(item)">
+        <tr>
+          <td><input :value="item._id" type="checkbox" v-model="ids"/></td>
+          <td v-for="column in columns">
+            <span v-html="getValue(item, column)"></span>
+          </td>
+          <td><a href="">Edit</a></td>
+          <td><a v-on:click="toggleMore(item)">More</a></td>
+        </tr>
+        <tr class="showMore" v-if="item.showMore">
+          <td colspan="10">
+            ID: {{item._id}}
+          </td>
+        </tr>
+      </tbody>
+    </dnw-table>
   </div>
 </template>
 <script>
   import Table from '../../components/Table.vue'
+  import TableHeader from './CategoryHeader.vue'
   import Vue from "vue"
   import { mapGetters, mapActions } from "vuex"
 
   export default {
+    data() {
+      return {
+        columns: this.getColumns(),
+        ids: [],
+        allChecked: false
+      }
+    },
     components: {
-      'dnw-table': Table
+      'dnw-table': Table,
+      'dnw-table-header': TableHeader
     },
     watch: {
-      categoriesLength(newCount, oldCount) {
-        Vue.set(this.$refs.dnwTable, 'items', this.categories);
+      idCount(newCount) {
+        this.allChecked = newCount === this.categories.length;
+      },
+      categoriesLength() {
+        this.ids = [];
+        this.allChecked = false;
       }
     },
     computed: {
       ...mapGetters('categoriesModule', ['categories']),
       categoriesLength() {
-        return this.categories.length
+        return this.categories.length;
+      },
+      idCount() {
+        return this.ids.length;
       }
     },
     methods: {
       ...mapActions('categoriesModule', {
         getList: 'getList'
       }),
-      renderInput(item) {
-        return `<input type="checkbox" />`;
+      selectItem(id) {
+        this.ids.push(id);
       },
-      updateStatus() {
+      checkAll() {
+        if(this.allChecked){
+          this.ids = [];
+          return;
+        }
+        this.ids = this.categories.map( x => x._id);
+      },
+      toggleMore(item) {
+        const showMore = item.showMore;
+        Vue.set(item, 'showMore', !showMore);
+      },
+      getRowClass(item) {
+        if (item && !item.isActive) {
+          return "inactive";
+        }
+      },
+      getValue(item, column) {
+        if(column.hasOwnProperty("render")){
+          return column.render(item);
+        }
 
+        return item[column.prop];
       },
       getColumns() {
         return [
-          {
-            header: `<input type="checkbox" />`,
-            render: this.renderInput
-          },
-          {
-            header: "ID",
-            prop: "_id"
-          },
           {
             header: "Name",
             prop: "name"
@@ -88,8 +110,7 @@
       }
     },
     mounted() {
-      Vue.set(this.$refs.dnwTable, 'columns', this.getColumns());
-      Vue.set(this.$refs.dnwTable, 'items', this.categories);
+      Vue.set(this.$refs.dnwCategoryTable, 'columns', this.getColumns());
       this.getList();
     }
   }

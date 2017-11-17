@@ -12,6 +12,18 @@ const service = {
           reject(response.status);
         });
     });
+  },
+  updateStatus(ids, status) {
+    return new Promise((resolve, reject) => {
+      axios
+        .post("/categories/status", { ids, status })
+        .then(response => {
+          resolve(response.data);
+        })
+        .catch(response => {
+          reject(response.status);
+        });
+    });
   }
 };
 
