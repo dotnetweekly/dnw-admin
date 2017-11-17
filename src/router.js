@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 const Login = () => System.import("./pages/Login.vue");
 
 const Categories = () => System.import("./pages/Categories/CategoryList.vue");
+const CategoryEdit = () => System.import("./pages/Categories/CategoryEdit.vue");
 
 const Links = () => System.import("./pages/Links/LinkList.vue");
 const LinkAdd = () => System.import("./pages/Links/LinkAdd.vue");
@@ -18,6 +19,7 @@ const router = new VueRouter({
   scrollBehavior: (to, from, savedPosition) => ({ y: 0 }),
   routes: [
     { path: "/categories", component: Categories },
+    { path: "/categories/add", component: CategoryEdit },
     { path: "/links", component: Links },
     { path: "/links/add", component: LinkAdd },
     { path: "/login", component: Login },

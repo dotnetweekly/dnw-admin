@@ -25,7 +25,7 @@
   <div class="column">
   </div>
   <div class="column is-narrow">
-    <router-link class="button is-primary" to="/link/add">Add</router-link>
+    <router-link class="button is-primary" to="/categories/add">Add</router-link>
   </div>
 </div>
 </template>
