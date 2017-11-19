@@ -14,7 +14,9 @@
           <td v-for="column in columns">
             <span v-html="getValue(item, column)"></span>
           </td>
-          <td><a href="">Edit</a></td>
+          <td>
+            <router-link :to="`/categories/edit/${item._id}`">Edit</router-link>
+          </td>
           <td><a v-on:click="toggleMore(item)">More</a></td>
         </tr>
         <tr class="showMore" v-if="item.showMore">
@@ -27,91 +29,91 @@
   </div>
 </template>
 <script>
-  import Table from '../../components/Table.vue'
-  import TableHeader from './CategoryHeader.vue'
-  import Vue from "vue"
-  import { mapGetters, mapActions } from "vuex"
+import Table from "../../components/Table.vue";
+import TableHeader from "./CategoryHeader.vue";
+import Vue from "vue";
+import { mapGetters, mapActions } from "vuex";
 
-  export default {
-    data() {
-      return {
-        columns: this.getColumns(),
-        ids: [],
-        allChecked: false
-      }
+export default {
+  data() {
+    return {
+      columns: this.getColumns(),
+      ids: [],
+      allChecked: false
+    };
+  },
+  components: {
+    "dnw-table": Table,
+    "dnw-table-header": TableHeader
+  },
+  watch: {
+    idCount(newCount) {
+      this.allChecked = newCount === this.categories.length;
     },
-    components: {
-      'dnw-table': Table,
-      'dnw-table-header': TableHeader
-    },
-    watch: {
-      idCount(newCount) {
-        this.allChecked = newCount === this.categories.length;
-      },
-      categoriesLength() {
-        this.ids = [];
-        this.allChecked = false;
-      }
-    },
-    computed: {
-      ...mapGetters('categoriesModule', ['categories']),
-      categoriesLength() {
-        return this.categories.length;
-      },
-      idCount() {
-        return this.ids.length;
-      }
-    },
-    methods: {
-      ...mapActions('categoriesModule', {
-        getList: 'getList'
-      }),
-      selectItem(id) {
-        this.ids.push(id);
-      },
-      checkAll() {
-        if(this.allChecked){
-          this.ids = [];
-          return;
-        }
-        this.ids = this.categories.map( x => x._id);
-      },
-      toggleMore(item) {
-        const showMore = item.showMore;
-        Vue.set(item, 'showMore', !showMore);
-      },
-      getRowClass(item) {
-        if (item && !item.isActive) {
-          return "inactive";
-        }
-      },
-      getValue(item, column) {
-        if(column.hasOwnProperty("render")){
-          return column.render(item);
-        }
-
-        return item[column.prop];
-      },
-      getColumns() {
-        return [
-          {
-            header: "Name",
-            prop: "name"
-          },
-          {
-            header: "Slug",
-            prop: "slug"
-          },
-          {
-            header: "Created",
-            prop: "createdOn"
-          }
-        ]
-      }
-    },
-    mounted() {
-      Vue.set(this.$refs.dnwCategoryTable, 'columns', this.getColumns());
-      this.getList();
+    categoriesLength() {
+      this.ids = [];
+      this.allChecked = false;
     }
+  },
+  computed: {
+    ...mapGetters("categoriesModule", ["categories"]),
+    categoriesLength() {
+      return this.categories.length;
+    },
+    idCount() {
+      return this.ids.length;
+    }
+  },
+  methods: {
+    ...mapActions("categoriesModule", {
+      getList: "getList"
+    }),
+    selectItem(id) {
+      this.ids.push(id);
+    },
+    checkAll() {
+      if (this.allChecked) {
+        this.ids = [];
+        return;
+      }
+      this.ids = this.categories.map(x => x._id);
+    },
+    toggleMore(item) {
+      const showMore = item.showMore;
+      Vue.set(item, "showMore", !showMore);
+    },
+    getRowClass(item) {
+      if (item && !item.isActive) {
+        return "inactive";
+      }
+    },
+    getValue(item, column) {
+      if (column.hasOwnProperty("render")) {
+        return column.render(item);
+      }
+
+      return item[column.prop];
+    },
+    getColumns() {
+      return [
+        {
+          header: "Name",
+          prop: "name"
+        },
+        {
+          header: "Slug",
+          prop: "slug"
+        },
+        {
+          header: "Created",
+          prop: "createdOn"
+        }
+      ];
+    }
+  },
+  mounted() {
+    Vue.set(this.$refs.dnwCategoryTable, "columns", this.getColumns());
+    this.getList();
   }
+};
 </script>

@@ -15,7 +15,7 @@
           <a v-on:click="disable()" class="dropdown-item">
             Disable
           </a>
-          <a v-on:click="deleteItems()" class="dropdown-item">
+          <a v-on:click="deleteSelected()" class="dropdown-item">
             Delete
           </a>
         </div>
@@ -31,23 +31,23 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
+import { mapActions } from "vuex";
 export default {
   props: ["ids"],
   methods: {
-    ...mapActions('categoriesModule', {
-      changeStatus: 'changeStatus'
+    ...mapActions("categoriesModule", {
+      changeStatus: "changeStatus",
+      deleteItems: "deleteItems"
     }),
     active() {
-      this.changeStatus({ids: this.ids, status: true});
+      this.changeStatus({ ids: this.ids, status: true });
     },
     disable() {
-      this.changeStatus({ids: this.ids, status: false});
+      this.changeStatus({ ids: this.ids, status: false });
     },
-    deleteItems() {
-
+    deleteSelected() {
+      this.deleteItems(this.ids);
     }
   }
-}
-
+};
 </script>

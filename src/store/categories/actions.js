@@ -12,6 +12,24 @@ const actions = {
       context.commit("loadCategories", payload.data);
       actions.getList(context);
     });
+  },
+  updateCategory(context, category) {
+    appService.updateCategory(category).then(payload => {
+      if (payload.success) {
+        context.commit("loadCategories", payload.data);
+        actions.getList(context);
+        alert("Saved");
+      }
+    });
+  },
+  deleteItems(context, ids) {
+    console.log(ids);
+    appService.deleteItems(ids).then(payload => {
+      if (payload.success) {
+        context.commit("loadCategories", payload.data);
+        actions.getList(context);
+      }
+    });
   }
 };
 
