@@ -16,7 +16,7 @@ const service = {
   updateStatus(ids, status) {
     return new Promise((resolve, reject) => {
       axios
-        .post("/categories/status", { ids, status })
+        .post("/categories/isActive", { ids, value: status })
         .then(response => {
           resolve(response.data);
         })
