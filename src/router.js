@@ -7,6 +7,9 @@ const Categories = () => System.import("./pages/Categories/CategoryList.vue");
 const CategoryUpdate = () =>
   System.import("./pages/Categories/CategoryUpdate.vue");
 
+const Tags = () => System.import("./pages/Tags/TagList.vue");
+const TagsUpdate = () => System.import("./pages/Tags/TagUpdate.vue");
+
 const Links = () => System.import("./pages/Links/LinkList.vue");
 const LinkEdit = () => System.import("./pages/Links/LinkEdit.vue");
 
@@ -22,6 +25,9 @@ const router = new VueRouter({
     { path: "/categories", component: Categories },
     { path: "/categories/add", component: CategoryUpdate },
     { path: "/categories/edit/:id", component: CategoryUpdate },
+    { path: "/tags", component: Tags },
+    { path: "/tags/add", component: TagsUpdate },
+    { path: "/tags/edit/:id", component: TagsUpdate },
     { path: "/links", component: Links },
     { path: "/links/add", component: LinkEdit },
     { path: "/links/edit/:id", component: LinkEdit },
