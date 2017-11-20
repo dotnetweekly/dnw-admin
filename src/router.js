@@ -13,6 +13,9 @@ const TagsUpdate = () => System.import("./pages/Tags/TagUpdate.vue");
 const Links = () => System.import("./pages/Links/LinkList.vue");
 const LinkEdit = () => System.import("./pages/Links/LinkEdit.vue");
 
+const Users = () => System.import("./pages/Users/UserList.vue");
+const UserEdit = () => System.import("./pages/Users/UserUpdate.vue");
+
 const NotFound = () => System.import("./theme/NotFound.vue");
 
 Vue.use(VueRouter);
@@ -31,6 +34,9 @@ const router = new VueRouter({
     { path: "/links", component: Links },
     { path: "/links/add", component: LinkEdit },
     { path: "/links/edit/:id", component: LinkEdit },
+    { path: "/users", component: Users },
+    { path: "/users/add", component: UserEdit },
+    { path: "/users/edit/:id", component: UserEdit },
     { path: "/login", component: Login },
     { path: "*", component: NotFound }
   ]

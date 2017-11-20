@@ -4,6 +4,7 @@ import authModule from "./auth";
 import linksModule from "./links";
 import categoriesModule from "./categories";
 import tagsModule from "./tags";
+import usersModule from "./users";
 
 Vue.use(Vuex);
 
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
     authModule,
     linksModule,
     categoriesModule,
-    tagsModule
+    tagsModule,
+    usersModule
   }
 });
 
