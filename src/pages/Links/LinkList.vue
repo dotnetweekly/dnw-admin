@@ -14,7 +14,9 @@
           <td v-for="column in columns">
             <span v-html="getValue(item, column)"></span>
           </td>
-          <td><a href="">Edit</a></td>
+          <td>
+            <router-link :to="`/links/edit/${item._id}`">Edit</router-link>
+          </td>
           <td><a v-on:click="toggleMore(item)">More</a></td>
         </tr>
         <tr class="showMore" v-if="item.showMore">
@@ -45,16 +47,35 @@
       'dnw-table': Table,
       'dnw-table-header': TableHeader
     },
+    watch: {
+      idCount(newCount) {
+        this.allChecked = newCount === this.links.length;
+      },
+      tagsLength() {
+        this.ids = [];
+        this.allChecked = false;
+      }
+    },
     computed: {
       ...mapGetters('linksModule', ['links']),
       linksLength() {
-        return this.links.length
+        return this.links.length;
+      },
+      idCount() {
+        return this.ids.length;
       }
     },
     methods: {
       ...mapActions('linksModule', {
         getList: 'getList'
       }),
+      checkAll() {
+        if (this.allChecked) {
+          this.ids = [];
+          return;
+        }
+        this.ids = this.links.map(x => x._id);
+      },
       getRowClass(item) {
         if (item && !item.isActive) {
           return "inactive";
@@ -70,6 +91,9 @@
       renderUrl(item) {
         return `<a target="_blank" href="${item.url}">${item.url}</a>`;
       },
+      renderUpvotes(item) {
+        return `<div class="has-text-centered">${item.upvotes}</div>`;
+      },
       renderCategory(item) {
         return item.category.name;
       },
@@ -79,6 +103,11 @@
       },
       getColumns() {
         return [
+          {
+            header: "Upvotes",
+            prop: "upvotes",
+            render: this.renderUpvotes
+          },
           {
             header: "Title",
             prop: "title"

@@ -68,9 +68,6 @@ export default {
     ...mapActions("tagsModule", {
       getItems: "getItems"
     }),
-    selectItem(id) {
-      this.ids.push(id);
-    },
     checkAll() {
       if (this.allChecked) {
         this.ids = [];

@@ -9,13 +9,13 @@
       </div>
       <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
-          <a href="#" class="dropdown-item">
+          <a v-on:click="active()" class="dropdown-item">
             Activate
           </a>
-          <a class="dropdown-item">
+          <a v-on:click="disable()" class="dropdown-item">
             Disable
           </a>
-          <a href="#" class="dropdown-item">
+          <a v-on:click="deleteSelected()" class="dropdown-item">
             Delete
           </a>
         </div>
@@ -59,3 +59,25 @@
   </div>
 </div>
 </template>
+
+<script>
+import { mapActions } from "vuex";
+export default {
+  props: ["ids"],
+  methods: {
+    ...mapActions("linksModule", {
+      updateStatus: "updateStatus",
+      deleteItems: "deleteItems"
+    }),
+    active() {
+      this.updateStatus({ ids: this.ids, status: true });
+    },
+    disable() {
+      this.updateStatus({ ids: this.ids, status: false });
+    },
+    deleteSelected() {
+      this.deleteItems(this.ids);
+    }
+  }
+};
+</script>

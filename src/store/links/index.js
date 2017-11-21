@@ -2,7 +2,11 @@ import actions from "./actions";
 import mutations from "./mutations";
 
 const state = {
-  links: []
+  links: [],
+  filters: {
+    categories: [],
+    tags: []
+  }
 };
 
 const getters = {
