@@ -31,7 +31,7 @@
         <v-select multiple class="is-fullhd" label="name" placeholder="Tags" v-model="selected.tags" :options="filter.tags"></v-select>
       </div>
       <div class="column is-narrow">
-        <v-select label="_id" placeholder="Category" v-model="selected.category" :options="filter.categories"></v-select>
+        <v-select label="name" placeholder="Category" v-model="selected.category" :options="filter.categories"></v-select>
       </div>
     </div>
   </div>
