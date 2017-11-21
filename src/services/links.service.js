@@ -49,10 +49,10 @@ const service = {
         });
     });
   },
-  updateItem(category) {
+  updateItem(link) {
     return new Promise((resolve, reject) => {
       axios
-        .post(`/link/update/`, category)
+        .post(`/link/`, link)
         .then(response => {
           resolve(response.data);
         })

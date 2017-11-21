@@ -1,4 +1,6 @@
 import appService from "../../services/links.service";
+import categoryService from "../../services/categories.service";
+import tagService from "../../services/tags.service";
 
 const actions = {
   getList(context) {
@@ -12,8 +14,8 @@ const actions = {
       actions.getList(context);
     });
   },
-  updateLink(context, category) {
-    appService.updateLink(category).then(payload => {
+  updateItem(context, category) {
+    appService.updateItem(category).then(payload => {
       if (payload.success) {
         context.commit("linksFound", payload.data);
         actions.getList(context);
@@ -22,13 +24,21 @@ const actions = {
     });
   },
   deleteItems(context, ids) {
-    console.log(ids);
     appService.deleteItems(ids).then(payload => {
       if (payload.success) {
         context.commit("linksFound", payload.data);
         actions.getList(context);
       }
     });
+  },
+  loadFilters(context) {
+    categoryService.getList().then(payload => {
+      context.state.filter.categories = payload.data;
+    })
+    
+    tagService.getItems().then(payload => {
+      context.state.filter.tags = payload.data;
+    })
   }
 };
 

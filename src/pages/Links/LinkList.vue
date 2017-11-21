@@ -67,7 +67,8 @@
     },
     methods: {
       ...mapActions('linksModule', {
-        getList: 'getList'
+        getList: 'getList',
+        loadFilters: 'loadFilters'
       }),
       checkAll() {
         if (this.allChecked) {
@@ -132,6 +133,7 @@
     mounted() {
       Vue.set(this.$refs.dnwTable, 'columns', this.getColumns());
       this.getList();
+      this.loadFilters();
     }
   }
 </script>

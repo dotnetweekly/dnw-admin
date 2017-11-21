@@ -11,7 +11,7 @@ const Tags = () => System.import("./pages/Tags/TagList.vue");
 const TagsUpdate = () => System.import("./pages/Tags/TagUpdate.vue");
 
 const Links = () => System.import("./pages/Links/LinkList.vue");
-const LinkEdit = () => System.import("./pages/Links/LinkEdit.vue");
+const LinkUpdate = () => System.import("./pages/Links/LinkUpdate.vue");
 
 const Users = () => System.import("./pages/Users/UserList.vue");
 const UserEdit = () => System.import("./pages/Users/UserUpdate.vue");
@@ -32,8 +32,8 @@ const router = new VueRouter({
     { path: "/tags/add", component: TagsUpdate },
     { path: "/tags/edit/:id", component: TagsUpdate },
     { path: "/links", component: Links },
-    { path: "/links/add", component: LinkEdit },
-    { path: "/links/edit/:id", component: LinkEdit },
+    { path: "/links/add", component: LinkUpdate },
+    { path: "/links/edit/:id", component: LinkUpdate },
     { path: "/users", component: Users },
     { path: "/users/add", component: UserEdit },
     { path: "/users/edit/:id", component: UserEdit },

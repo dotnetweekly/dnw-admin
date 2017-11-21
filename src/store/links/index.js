@@ -3,15 +3,27 @@ import mutations from "./mutations";
 
 const state = {
   links: [],
-  filters: {
+  filter: {
     categories: [],
-    tags: []
+    tags: [],
+    users: []
+  },
+  selected: {
+    category: "",
+    tag: "",
+    name: ""
   }
 };
 
 const getters = {
   links: state => {
     return state.links;
+  },
+  filter: state => {
+    return state.filter;
+  },
+  selected: state => {
+    return state.selected;
   }
 };
 
