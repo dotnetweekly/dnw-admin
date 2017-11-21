@@ -30,112 +30,112 @@
   </div>
 </template>
 <script>
-  import Table from '../../components/Table.vue'
-  import TableHeader from './LinkListHeader.vue'
-  import Vue from "vue"
-  import { mapGetters, mapActions } from "vuex"
+import Table from "../../components/Table.vue";
+import TableHeader from "./LinkListHeader.vue";
+import Vue from "vue";
+import { mapGetters, mapActions } from "vuex";
 
-  export default {
-    data() {
-      return {
-        columns: this.getColumns(),
-        ids: [],
-        allChecked: false
-      }
+export default {
+  data() {
+    return {
+      columns: this.getColumns(),
+      ids: [],
+      allChecked: false
+    };
+  },
+  components: {
+    "dnw-table": Table,
+    "dnw-table-header": TableHeader
+  },
+  watch: {
+    idCount(newCount) {
+      this.allChecked = newCount === this.links.length;
     },
-    components: {
-      'dnw-table': Table,
-      'dnw-table-header': TableHeader
-    },
-    watch: {
-      idCount(newCount) {
-        this.allChecked = newCount === this.links.length;
-      },
-      tagsLength() {
-        this.ids = [];
-        this.allChecked = false;
-      }
-    },
-    computed: {
-      ...mapGetters('linksModule', ['links']),
-      linksLength() {
-        return this.links.length;
-      },
-      idCount() {
-        return this.ids.length;
-      }
-    },
-    methods: {
-      ...mapActions('linksModule', {
-        getList: 'getList',
-        loadFilters: 'loadFilters'
-      }),
-      checkAll() {
-        if (this.allChecked) {
-          this.ids = [];
-          return;
-        }
-        this.ids = this.links.map(x => x._id);
-      },
-      getRowClass(item) {
-        if (item && !item.isActive) {
-          return "inactive";
-        }
-      },
-      getValue(item, column) {
-        if(column.hasOwnProperty("render")){
-          return column.render(item);
-        }
-
-        return item[column.prop];
-      },
-      renderUrl(item) {
-        return `<a target="_blank" href="${item.url}">${item.url}</a>`;
-      },
-      renderUpvotes(item) {
-        return `<div class="has-text-centered">${item.upvotes}</div>`;
-      },
-      renderCategory(item) {
-        return item.category.name;
-      },
-      toggleMore(item) {
-        const showMore = item.showMore;
-        Vue.set(item, 'showMore', !showMore);
-      },
-      getColumns() {
-        return [
-          {
-            header: "Upvotes",
-            prop: "upvotes",
-            render: this.renderUpvotes
-          },
-          {
-            header: "Title",
-            prop: "title"
-          },
-          {
-            header: "Url",
-            prop: "url",
-            render: this.renderUrl
-          },
-          {
-            header: "Created",
-            prop: "createdOn"
-          },
-          {
-            header: "Category",
-            prop: "",
-            render: this.renderCategory
-          }
-        ]
-      }
-    },
-    mounted() {
-      Vue.set(this.$refs.dnwTable, 'columns', this.getColumns());
-      this.getList();
-      this.loadFilters();
+    tagsLength() {
+      this.ids = [];
+      this.allChecked = false;
     }
+  },
+  computed: {
+    ...mapGetters("linksModule", ["links"]),
+    linksLength() {
+      return this.links.length;
+    },
+    idCount() {
+      return this.ids.length;
+    }
+  },
+  methods: {
+    ...mapActions("linksModule", {
+      getList: "getList",
+      loadFilters: "loadFilters"
+    }),
+    checkAll() {
+      if (this.allChecked) {
+        this.ids = [];
+        return;
+      }
+      this.ids = this.links.map(x => x._id);
+    },
+    getRowClass(item) {
+      if (item && !item.isActive) {
+        return "inactive";
+      }
+    },
+    getValue(item, column) {
+      if (column.hasOwnProperty("render")) {
+        return column.render(item);
+      }
+
+      return item[column.prop];
+    },
+    renderUrl(item) {
+      return `<a target="_blank" href="${item.url}">${item.url}</a>`;
+    },
+    renderUpvotes(item) {
+      return `<div class="has-text-centered">${item.upvotes}</div>`;
+    },
+    renderCategory(item) {
+      return item.category.name;
+    },
+    toggleMore(item) {
+      const showMore = item.showMore;
+      Vue.set(item, "showMore", !showMore);
+    },
+    getColumns() {
+      return [
+        {
+          header: "Upvotes",
+          prop: "upvotes",
+          render: this.renderUpvotes
+        },
+        {
+          header: "Title",
+          prop: "title"
+        },
+        {
+          header: "Url",
+          prop: "url",
+          render: this.renderUrl
+        },
+        {
+          header: "Created",
+          prop: "createdOn"
+        },
+        {
+          header: "Category",
+          prop: "",
+          render: this.renderCategory
+        }
+      ];
+    }
+  },
+  mounted() {
+    Vue.set(this.$refs.dnwTable, "columns", this.getColumns());
+    this.getList();
+    this.loadFilters();
   }
+};
 </script>
 <style scoped>
 
