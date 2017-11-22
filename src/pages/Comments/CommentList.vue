@@ -89,7 +89,16 @@ export default {
         return column.render(item);
       }
 
-      return item[column.prop];
+      return this.resolve(item, column.prop);
+    },
+    resolve(obj, path) {
+      path = path.split(".");
+      var current = obj;
+      while (path.length) {
+        if (typeof current !== "object") return undefined;
+        current = current[path.shift()];
+      }
+      return current;
     },
     getColumns() {
       return [
@@ -104,6 +113,10 @@ export default {
         {
           header: "User",
           prop: "user.email"
+        },
+        {
+          header: "Link",
+          prop: "link.title"
         }
       ];
     }
