@@ -16,6 +16,15 @@ const LinkUpdate = () => System.import("./pages/Links/LinkUpdate.vue");
 const Users = () => System.import("./pages/Users/UserList.vue");
 const UserEdit = () => System.import("./pages/Users/UserUpdate.vue");
 
+const Newsletters = () =>
+  System.import("./pages/Newsletters/NewsletterList.vue");
+const NewslettersUpdate = () =>
+  System.import("./pages/Newsletters/NewsletterUpdate.vue");
+
+const Comments = () => System.import("./pages/Comments/CommentList.vue");
+const CommentsUpdate = () =>
+  System.import("./pages/Comments/CommentUpdate.vue");
+
 const NotFound = () => System.import("./theme/NotFound.vue");
 
 Vue.use(VueRouter);
@@ -37,6 +46,14 @@ const router = new VueRouter({
     { path: "/users", component: Users },
     { path: "/users/add", component: UserEdit },
     { path: "/users/edit/:id", component: UserEdit },
+    { path: "/newsletters", component: Newsletters },
+    { path: "/newsletters/add", component: NewslettersUpdate },
+    { path: "/newsletters/edit/:id", component: NewslettersUpdate },
+    ,
+    { path: "/comments", component: Comments },
+    { path: "/comments/add", component: CommentsUpdate },
+    { path: "/comments/edit/:id", component: CommentsUpdate },
+    ,
     { path: "/login", component: Login },
     { path: "*", component: NotFound }
   ]
