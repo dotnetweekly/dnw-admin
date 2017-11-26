@@ -12,7 +12,7 @@ axios.interceptors.request.use(function(config) {
   if (typeof window === "undefined") {
     return config;
   }
-  const token = window.localStorage.getItem("token");
+  const token = window.localStorage.getItem("dnwAdminToken");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

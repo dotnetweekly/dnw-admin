@@ -60,7 +60,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  let expiration = window.localStorage.getItem("tokenExpiration");
+  let expiration = window.localStorage.getItem("dnwAdminTokenExpiration");
   var unixTimestamp = new Date().getTime() / 1000;
   if (
     (expiration === null ||

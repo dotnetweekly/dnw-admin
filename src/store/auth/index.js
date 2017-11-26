@@ -14,7 +14,7 @@ const getters = {
 
 if (typeof window !== "undefined") {
   document.addEventListener("DOMContentLoaded", function(event) {
-    let expiration = window.localStorage.getItem("tokenExpiration");
+    let expiration = window.localStorage.getItem("dnwAdminTokenExpiration");
     var unixTimestamp = new Date().getTime() / 1000;
     if (expiration !== null && parseInt(expiration) - unixTimestamp > 0) {
       state.isAuthenticated = true;
