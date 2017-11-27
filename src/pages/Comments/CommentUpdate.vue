@@ -8,6 +8,13 @@
     <input type="hidden" v-model="item._id" />
 
     <div class="field">
+      <label class="label">Parent</label>
+      <div class="control">
+        <input class="input" v-model="item.parent" type="text" placeholder="Text input">
+      </div>
+    </div>
+
+    <div class="field">
       <label class="label">Content</label>
       <div class="control">
         <textarea class="textarea" v-model="item.content" placeholder="Textarea"></textarea>
