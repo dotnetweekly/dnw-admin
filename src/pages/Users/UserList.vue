@@ -58,7 +58,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("usersModule", ["users"]),
+    ...mapGetters("userModule", ["users"]),
     itemsLength() {
       return this.users.length;
     },
@@ -67,7 +67,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("usersModule", {
+    ...mapActions("userModule", {
       getItems: "getItems"
     }),
     selectItem(id) {

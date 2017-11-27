@@ -98,7 +98,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("usersModule", {
+    ...mapActions("userModule", {
       updateItem: "updateItem"
     }),
     getEditItem() {

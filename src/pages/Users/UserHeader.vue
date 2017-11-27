@@ -35,7 +35,7 @@ import { mapActions } from "vuex";
 export default {
   props: ["ids"],
   methods: {
-    ...mapActions("usersModule", {
+    ...mapActions("userModule", {
       updateStatus: "updateStatus",
       deleteItems: "deleteItems"
     }),
