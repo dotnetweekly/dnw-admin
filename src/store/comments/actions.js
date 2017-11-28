@@ -1,32 +1,28 @@
 import appService from "../../services/comments.service";
 
 const actions = {
-  getItems(context) {
+  getItems(context, { id }) {
     context.state.comments = [];
-    appService.getItems({ page: 1 }).then(payload => {
+    appService.getItems({ link: id }).then(payload => {
       context.commit("loadItems", payload.data);
     });
   },
-  updateStatus(context, { ids, status }) {
-    appService.updateStatus(ids, status).then(payload => {
-      context.commit("loadItems", payload.data);
-      actions.getItems(context);
+  updateStatus(context, { ids, status, link }) {
+    appService.updateStatus({ ids, status, link }).then(payload => {
+      actions.getItems(context, { id: link });
     });
   },
-  updateItem(context, comment) {
-    appService.updateItem(comment).then(payload => {
+  updateItem(context, { link, item }) {
+    appService.updateItem({ link, item }).then(payload => {
       if (payload.success) {
-        context.commit("loadItems", payload.data);
-        actions.getItems(context);
-        alert("Saved");
+        actions.getItems(context, { id: link });
       }
     });
   },
-  deleteItems(context, ids) {
-    appService.deleteItems(ids).then(payload => {
+  deleteItems(context, { ids, link }) {
+    appService.deleteItems({ ids, link }).then(payload => {
       if (payload.success) {
-        context.commit("loadItems", payload.data);
-        actions.getItems(context);
+        actions.getItems(context, { id: link });
       }
     });
   }

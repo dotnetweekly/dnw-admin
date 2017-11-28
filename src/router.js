@@ -50,9 +50,8 @@ const router = new VueRouter({
     { path: "/newsletters/add", component: NewslettersUpdate },
     { path: "/newsletters/edit/:id", component: NewslettersUpdate },
     ,
-    { path: "/comments", component: Comments },
-    { path: "/comments/add", component: CommentsUpdate },
-    { path: "/comments/edit/:id", component: CommentsUpdate },
+    { path: "/comments/:link", component: Comments },
+    { path: "/comments/:link/:id/", component: CommentsUpdate },
     ,
     { path: "/login", component: Login },
     { path: "*", component: NotFound }

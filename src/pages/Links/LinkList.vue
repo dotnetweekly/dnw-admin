@@ -7,6 +7,7 @@
         <th v-for="column in columns"><span v-html="column.header"/></th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
       <tbody slot="items" v-for="item in links" :class="getRowClass(item)">
         <tr>
@@ -16,6 +17,9 @@
           </td>
           <td>
             <router-link :to="`/links/edit/${item._id}`">Edit</router-link>
+          </td>
+          <td>
+            <router-link :to="`/comments/${item._id}`">Comments</router-link>
           </td>
           <td><a v-on:click="toggleMore(item)">More</a></td>
         </tr>

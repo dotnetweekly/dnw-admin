@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dnw-table-header v-bind:ids="ids"></dnw-table-header>
+    <dnw-table-header v-bind:link="link" v-bind:ids="ids"></dnw-table-header>
     <dnw-table ref="dnwTable">
       <tr slot="row-header">
         <th><input v-model="allChecked" v-on:click="checkAll()" type="checkbox" /></th>
@@ -15,7 +15,7 @@
             <span v-html="getValue(item, column)"></span>
           </td>
           <td>
-            <router-link :to="`/comments/edit/${item._id}`">Edit</router-link>
+            <router-link :to="`/comments/${link}/${item._id}`">Edit</router-link>
           </td>
           <td><a v-on:click="toggleMore(item)">More</a></td>
         </tr>
@@ -39,7 +39,8 @@ export default {
     return {
       columns: this.getColumns(),
       ids: [],
-      allChecked: false
+      allChecked: false,
+      link: this.$route.params.link
     };
   },
   components: {
@@ -123,7 +124,7 @@ export default {
   },
   mounted() {
     Vue.set(this.$refs.dnwTable, "columns", this.getColumns());
-    this.getItems();
+    this.getItems({ id: this.$route.params.link });
   }
 };
 </script>

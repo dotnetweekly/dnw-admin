@@ -25,7 +25,7 @@
   <div class="column">
   </div>
   <div class="column is-narrow">
-    <router-link class="button is-primary" to="/comments/add">Add</router-link>
+    <router-link class="button is-primary" :to="`/comments/${link}/add`">Add</router-link>
   </div>
 </div>
 </template>
@@ -33,20 +33,21 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-  props: ["ids"],
+  props: ["ids", "link"],
   methods: {
     ...mapActions("commentsModule", {
       updateStatus: "updateStatus",
       deleteItems: "deleteItems"
     }),
     active() {
-      this.updateStatus({ ids: this.ids, status: true });
+      this.updateStatus({ ids: this.ids, status: true, link: this.link});
     },
     disable() {
-      this.updateStatus({ ids: this.ids, status: false });
+      console.log({ ids: this.ids, status: false, link: this.link });
+      this.updateStatus({ ids: this.ids, status: false, link: this.link});
     },
     deleteSelected() {
-      this.deleteItems(this.ids);
+      this.deleteItems({ ids: this.ids, link: this.link});
     }
   }
 };

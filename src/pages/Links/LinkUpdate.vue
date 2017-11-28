@@ -35,12 +35,18 @@
     </div>
 
     <div class="column">
+      <label class="label">Tags</label>
       <v-select multiple class="is-fullhd" label="name" placeholder="Tags" v-model="item.tags" :options="filter.tags"></v-select>
     </div>
     <div class="column is-narrow">
+      <label class="label">Categories</label>
+      Category: {{ item.category.name }}<br/>
       <v-select label="name" placeholder="Category" v-model="item.category" :options="filter.categories"></v-select>
     </div>
+
     <div class="column is-narrow">
+      <label class="label">User</label>
+      Username: {{ item.user.username }}<br/>
       <v-select
         v-model="item.user"
         :debounce="250"

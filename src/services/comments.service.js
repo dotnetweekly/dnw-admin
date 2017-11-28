@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const service = {
-  getItems(paging) {
+  getItems({ link }) {
     return new Promise((resolve, reject) => {
       axios
-        .get("/comments", paging)
+        .get(`/comments/${link}`)
         .then(response => {
           resolve(response.data);
         })
@@ -13,10 +13,10 @@ const service = {
         });
     });
   },
-  getItem(id) {
+  getItem({ link, id }) {
     return new Promise((resolve, reject) => {
       axios
-        .get(`/comment/${id}`)
+        .get(`/comment/${link}/${id}`)
         .then(response => {
           resolve(response.data);
         })
@@ -25,10 +25,10 @@ const service = {
         });
     });
   },
-  deleteItems(ids) {
+  deleteItems({ ids, link }) {
     return new Promise((resolve, reject) => {
       axios
-        .delete("/comments", { data: { ids } })
+        .delete(`/comments/${link}`, { data: { ids } })
         .then(response => {
           resolve(response.data);
         })
@@ -37,10 +37,11 @@ const service = {
         });
     });
   },
-  updateStatus(ids, status) {
+  updateStatus({ ids, status, link }) {
+    console.log(ids, { ids, status, link });
     return new Promise((resolve, reject) => {
       axios
-        .post("/comments/isActive", { ids, value: status })
+        .post(`/comments/${link}/isActive`, { ids, value: status })
         .then(response => {
           resolve(response.data);
         })
@@ -49,10 +50,10 @@ const service = {
         });
     });
   },
-  updateItem(category) {
+  updateItem({ link, item }) {
     return new Promise((resolve, reject) => {
       axios
-        .post(`/comment/update/`, category)
+        .post(`/comment/${link}/${item._id}`, item)
         .then(response => {
           resolve(response.data);
         })

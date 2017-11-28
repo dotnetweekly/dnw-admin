@@ -2,17 +2,12 @@
 
   <div>
 
-  <h1 v-if="!item._id">Add Comment</h1>
-  <h1 v-if="item._id">Edit Comment {{item._id}}</h1>
+    <h1 v-if="!item._id">Add Comment</h1>
+    <h1 v-if="item._id">Edit Comment {{item._id}}</h1>
 
-    <input type="hidden" v-model="item._id" />
+    <h2>Link:  {{link}}</h2>
 
-    <div class="field">
-      <label class="label">Parent</label>
-      <div class="control">
-        <input class="input" v-model="item.parent" type="text" placeholder="Text input">
-      </div>
-    </div>
+    <input type="hidden" v-if="!item._id" v-model="item._id" />
 
     <div class="field">
       <label class="label">Content</label>
@@ -29,18 +24,6 @@
         :options="filterUsers"
         placeholder="Search Users.."
         label="email"
-      >
-      </v-select>
-    </div>
-
-    <div class="column is-narrow">
-      <v-select
-        v-model="item.link"
-        :debounce="250"
-        :on-search="getLinks"
-        :options="filterLinks"
-        placeholder="Search Links.."
-        label="title"
       >
       </v-select>
     </div>
@@ -75,12 +58,13 @@ export default {
   components: { vSelect },
   data() {
     return {
+      link: this.$route.params.link,
       filterUsers: [],
       filterLinks: [],
       item: {
         _id: "",
         content: "",
-        user: {},
+        user: null,
         link: {},
         isActive: true
       }
@@ -91,17 +75,20 @@ export default {
       updateItem: "updateItem"
     }),
     getEditItem() {
-      if (!this.$route.params.id) {
+      console.log(this.$route.params.id);
+      if (!this.$route.params.id || this.$route.params.id === "add") {
         return;
       }
-      service.getItem(this.$route.params.id).then(payload => {
+      service.getItem({ link: this.$route.params.link, id: this.$route.params.id }).then(payload => {
         if (payload.success) {
           this.item = payload.data;
         }
       });
     },
     saveItem() {
-      this.updateItem(this.item);
+      this.updateItem({ link: this.$route.params.link, item: this.item }).then(() => {
+          this.$router.push(`/comments/${this.link}`);
+      });
     },
     getUsers(search, loading) {
       loading(true);
@@ -111,17 +98,6 @@ export default {
         })
         .then(resp => {
           this.filterUsers = resp.data.data;
-          loading(false);
-        });
-    },
-    getLinks(search, loading) {
-      loading(true);
-      axios
-        .get("links", {
-          q: search
-        })
-        .then(resp => {
-          this.filterLinks = resp.data.data;
           loading(false);
         });
     }
