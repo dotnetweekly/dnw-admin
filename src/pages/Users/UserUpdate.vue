@@ -43,6 +43,19 @@
     </div>
 
     <div class="field">
+      <label class="label">Twitter</label>
+      <div class="control">
+        <input class="input" v-model="item.twitter" type="text" placeholder="Text input">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Github</label>
+      <div class="control">
+        <input class="input" v-model="item.github" type="text" placeholder="Text input">
+      </div>
+    </div>
+
+    <div class="field">
       <div class="control">
         <label class="checkbox">
           <input v-model="item.isActive" type="checkbox">
@@ -91,6 +104,8 @@ export default {
         firstName: "",
         lastName: "",
         password: "",
+        twitter: "",
+        github: "",
         isActive: true,
         subscribed: true,
         isAdmin: false
