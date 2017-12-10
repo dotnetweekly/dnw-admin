@@ -26,4 +26,9 @@
   .columns{
     flex-wrap: wrap
   }
+
+  .newsletter-desktop-preview{
+    width: 800px;
+    height: 800px;
+  }
 </style>

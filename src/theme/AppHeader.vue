@@ -9,6 +9,7 @@
       <router-link class="nav-item is-tab" to="/users">Users</router-link>
       <router-link class="nav-item is-tab" to="/tags">Tags</router-link>
       <router-link class="nav-item is-tab" to="/newsletters">Nesletters</router-link>
+      <router-link class="nav-item is-tab" to="/emails">Emails</router-link>
       <router-link class="nav-item is-tab" to="/login">Logout</router-link>
     </div>
   </nav>
