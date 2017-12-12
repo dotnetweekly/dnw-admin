@@ -27,7 +27,7 @@ export default {
   },
   mounted() {
     request
-      .get("/emails/newsletter/current")
+      .get("/emails/user/activate")
       .then(response => {
         const newsletterIframe = this.$el.querySelector("#newsletter-iframe");
         newsletterIframe.contentWindow.document.write(response.data.data);
