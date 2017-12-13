@@ -97,7 +97,7 @@ export default {
       return `<a target="_blank" href="${item.url}">${item.url}</a>`;
     },
     renderUpvotes(item) {
-      return `<div class="has-text-centered">${item.upvotes.length}</div>`;
+      return `<div class="has-text-centered">${item.upvoteCount}</div>`;
     },
     renderCategory(item) {
       return item.category.name;
