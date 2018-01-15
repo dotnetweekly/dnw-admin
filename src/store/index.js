@@ -7,6 +7,7 @@ import tagsModule from "./tags";
 import userModule from "./users";
 import newslettersModule from "./newsletters";
 import commentsModule from "./comments";
+import adsModule from "./ads";
 
 Vue.use(Vuex);
 
@@ -18,7 +19,8 @@ const store = new Vuex.Store({
     tagsModule,
     userModule,
     newslettersModule,
-    commentsModule
+    commentsModule,
+    adsModule
   }
 });
 

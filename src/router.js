@@ -22,6 +22,9 @@ const Emails = () => System.import('./pages/Emails/Emails.vue');
 const EmailNewsletterCurrent = () => System.import('./pages/Emails/NewsletterCurrent.vue');
 const EmailNewsletterRegistered = () => System.import('./pages/Emails/NewsletterRegistered.vue');
 
+const Ads = () => System.import('./pages/Ads/AdsList.vue');
+const AdsUpdate = () => System.import('./pages/Ads/AdsUpdate.vue');
+
 const Comments = () => System.import('./pages/Comments/CommentList.vue');
 const CommentsUpdate = () => System.import('./pages/Comments/CommentUpdate.vue');
 
@@ -37,21 +40,30 @@ const router = new VueRouter({
 		{ path: '/categories', component: Categories },
 		{ path: '/categories/add', component: CategoryUpdate },
 		{ path: '/categories/edit/:id', component: CategoryUpdate },
+
 		{ path: '/tags', component: Tags },
 		{ path: '/tags/add', component: TagsUpdate },
 		{ path: '/tags/edit/:id', component: TagsUpdate },
+
 		{ path: '/links', component: Links },
 		{ path: '/links/add', component: LinkUpdate },
 		{ path: '/links/edit/:id', component: LinkUpdate },
+
 		{ path: '/users', component: Users },
 		{ path: '/users/add', component: UserEdit },
 		{ path: '/users/edit/:id', component: UserEdit },
+
 		{ path: '/newsletters', component: Newsletters },
 		{ path: '/newsletters/add', component: NewslettersUpdate },
 		{ path: '/newsletters/edit/:id', component: NewslettersUpdate },
+
 		{ path: '/emails', component: Emails },
 		{ path: '/emails/newsletter-current', component: EmailNewsletterCurrent },
 		{ path: '/emails/newsletter-registered', component: EmailNewsletterRegistered },
+
+		{ path: '/ads', component: Ads },
+		{ path: '/ads/add', component: AdsUpdate },
+		{ path: '/ads/edit/:id', component: AdsUpdate },
 		,
 		{ path: '/comments/:link', component: Comments },
 		{ path: '/comments/:link/:id/', component: CommentsUpdate },
