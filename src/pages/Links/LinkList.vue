@@ -141,6 +141,10 @@ export default {
   }
 };
 </script>
-<style scoped>
-
+<style type="scss" scoped>
+  td span {
+    max-width: 300px;
+    display: block;
+    word-wrap: break-word;
+  }
 </style>
