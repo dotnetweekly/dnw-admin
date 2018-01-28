@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../request";
 
 const service = {
   getItems({ link }) {
@@ -38,7 +38,6 @@ const service = {
     });
   },
   updateStatus({ ids, status, link }) {
-    console.log(ids, { ids, status, link });
     return new Promise((resolve, reject) => {
       axios
         .post(`/comments/${link}/isActive`, { ids, value: status })
