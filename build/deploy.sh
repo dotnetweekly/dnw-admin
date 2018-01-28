@@ -1,5 +1,8 @@
 npm install
 npm install --only=dev
+
+sed -i 's/http:\/\/localhost:3000/https:\/\/dnw-api.azurewebsites.net/g' ./src/config.js
+
 npm run build
 
 cp -TR ./dist/ ../wwwroot/dist/
