@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from './config';
 
-axios.defaults.baseURL = config.api.local;
+axios.defaults.baseURL = process.env.API_DOMAIN || config.api;
 
 axios.interceptors.request.use(function(config) {
 	if (typeof window === 'undefined') {
