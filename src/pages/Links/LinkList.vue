@@ -25,8 +25,14 @@
         </tr>
         <tr class="showMore" v-if="item.showMore">
           <td colspan="10">
+            <p>Content: {{item.content}}</p>
             <p>ID: {{item._id}}</p>
             <p>Status: {{item.isActive}}</p>
+            <p>Tags:
+              <ul>
+                <li v-for="tag in tags">{{tag.name}}</li>
+              </ul>
+            </p>
           </td>
         </tr>
       </tbody>
@@ -100,7 +106,7 @@ export default {
       return `<div class="has-text-centered">${item.upvoteCount}</div>`;
     },
     renderCategory(item) {
-      return item.category.name;
+      return item.category ? item.category.name : "";
     },
     toggleMore(item) {
       const showMore = item.showMore;

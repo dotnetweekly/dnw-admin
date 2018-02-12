@@ -1,10 +1,16 @@
 import axios from "../request";
 
 const service = {
-  getList(paging) {
+  getList(searchParams) {
+    const params = {
+      week: searchParams.week,
+      year: searchParams.year,
+      category: searchParams.category ? searchParams.category.slug : "",
+      name: searchParams.name
+    }
     return new Promise((resolve, reject) => {
       axios
-        .get("/links", paging)
+        .get("/links", { params })
         .then(response => {
           resolve(response.data);
         })

@@ -2,9 +2,10 @@ import axios from "../request";
 
 const service = {
   getItems({ link }) {
+    const commentLink = link ? `/comments/${link}` : `/comments/`
     return new Promise((resolve, reject) => {
       axios
-        .get(`/comments/${link}`)
+        .get(commentLink)
         .then(response => {
           resolve(response.data);
         })
@@ -14,9 +15,10 @@ const service = {
     });
   },
   getItem({ link, id }) {
+    const commentLink = link ? `/comment/${link}/${id}` : `/comment/${id}`
     return new Promise((resolve, reject) => {
       axios
-        .get(`/comment/${link}/${id}`)
+        .get(commentLink)
         .then(response => {
           resolve(response.data);
         })
@@ -28,7 +30,7 @@ const service = {
   deleteItems({ ids, link }) {
     return new Promise((resolve, reject) => {
       axios
-        .delete(`/comments/${link}`, { data: { ids } })
+        .delete(`/comments/`, { data: { ids } })
         .then(response => {
           resolve(response.data);
         })
@@ -40,7 +42,7 @@ const service = {
   updateStatus({ ids, status, link }) {
     return new Promise((resolve, reject) => {
       axios
-        .post(`/comments/${link}/isActive`, { ids, value: status })
+        .post(`/comments/isActive`, { ids, value: status })
         .then(response => {
           resolve(response.data);
         })

@@ -3,8 +3,8 @@ import categoryService from "../../services/categories.service";
 import tagService from "../../services/tags.service";
 
 const actions = {
-  getList(context) {
-    appService.getList({ page: 1 }).then(payload => {
+  getList(context, params) {
+    appService.getList(context.state.selected).then(payload => {
       context.commit("linksFound", payload.data);
     });
   },
@@ -35,7 +35,7 @@ const actions = {
     categoryService.getList().then(payload => {
       context.state.filter.categories = payload.data;
     })
-    
+
     tagService.getItems().then(payload => {
       context.state.filter.tags = payload.data;
     })

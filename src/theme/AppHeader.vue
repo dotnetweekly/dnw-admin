@@ -6,6 +6,7 @@
     <div class="container" v-if="isAuthenticated">
       <router-link class="nav-item is-tab" to="/" exact>Home</router-link>
       <router-link class="nav-item is-tab" to="/links">Links</router-link>
+      <router-link class="nav-item is-tab" to="/comments">Comments</router-link>
       <router-link class="nav-item is-tab" to="/categories">Categories</router-link>
       <router-link class="nav-item is-tab" to="/users">Users</router-link>
       <router-link class="nav-item is-tab" to="/tags">Tags</router-link>

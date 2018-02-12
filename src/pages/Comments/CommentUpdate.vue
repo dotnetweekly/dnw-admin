@@ -75,18 +75,18 @@ export default {
       updateItem: "updateItem"
     }),
     getEditItem() {
-      console.log(this.$route.params.id);
       if (!this.$route.params.id || this.$route.params.id === "add") {
         return;
       }
-      service.getItem({ link: this.$route.params.link, id: this.$route.params.id }).then(payload => {
+      service.getItem({ link: this.link, id: this.$route.params.id }).then(payload => {
         if (payload.success) {
-          this.item = payload.data;
+          this.item = payload.data.comment;
+          this.link = payload.data.linkId;
         }
       });
     },
     saveItem() {
-      this.updateItem({ link: this.$route.params.link, item: this.item }).then(() => {
+      this.updateItem({ link: this.link, item: this.item }).then(() => {
           this.$router.push(`/comments/${this.link}`);
       });
     },

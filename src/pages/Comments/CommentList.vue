@@ -15,7 +15,8 @@
             <span v-html="getValue(item, column)"></span>
           </td>
           <td>
-            <router-link :to="`/comments/${link}/${item._id}`">Edit</router-link>
+            <router-link v-if="!link" :to="`/comment/${item._id}`">Edit</router-link>
+            <router-link v-if="link" :to="`/comments/${link}/${item._id}`">Edit</router-link>
           </td>
           <td><a v-on:click="toggleMore(item)">More</a></td>
         </tr>

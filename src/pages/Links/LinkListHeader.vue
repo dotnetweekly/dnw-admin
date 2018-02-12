@@ -25,15 +25,23 @@
   <div class="column">
     <div class="columns">
       <div class="column">
-        <input class="input" type="text" placeholder="Title" 
-        v-model="selected.name" />
+        <input class="input" type="text" placeholder="Title"
+        v-on:input="debounceInput" />
       </div>
       <div class="column">
-        <v-select multiple class="is-fullhd" label="name" placeholder="Tags" 
+        <v-select multiple class="is-fullhd" label="name" placeholder="Tags"
         v-model="selected.tags" :options="filter.tags"></v-select>
       </div>
+      <div class="column">
+          <v-select label="name" placeholder="Year" v-model="selected.year"
+          :options="filter.years"></v-select>
+      </div>
+      <div class="column">
+          <v-select label="name" placeholder="Week" v-model="selected.week"
+          :options="filter.weeks"></v-select>
+      </div>
       <div class="column is-narrow">
-        <v-select label="name" placeholder="Category" v-model="selected.category" 
+        <v-select label="name" placeholder="Category" v-model="selected.category"
         :options="filter.categories"></v-select>
       </div>
     </div>
@@ -47,14 +55,28 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import vSelect from "vue-select";
+import debounce from "debounce";
+
 export default {
   props: ["ids"],
   components: { vSelect },
+  watch: {
+    week (oldFilter, newFilter) {
+      this.getList();
+    }
+  },
   computed: {
-    ...mapGetters("linksModule", ["filter", "selected"])
+    ...mapGetters("linksModule", ["filter", "selected"]),
+    week () {
+      return JSON.stringify(this.selected);
+    }
   },
   methods: {
+    debounceInput: debounce(function (e) {
+      this.selected.name = e.target.value;
+    }, 1500),
     ...mapActions("linksModule", {
+      getList: "getList",
       updateStatus: "updateStatus",
       deleteItems: "deleteItems"
     }),
