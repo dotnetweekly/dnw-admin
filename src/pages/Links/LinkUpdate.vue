@@ -41,7 +41,7 @@
     <div class="column is-narrow">
       <label class="label">Categories</label>
       Category: {{ item.category.name }}<br/>
-      <v-select label="name" placeholder="Category" v-model="item.category" :options="filter.categories"></v-select>
+      <v-select label="slug" placeholder="Category" v-model="item.category" :options="filter.categories"></v-select>
     </div>
 
     <div class="column is-narrow">

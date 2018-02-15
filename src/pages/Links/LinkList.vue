@@ -30,7 +30,7 @@
             <p>Status: {{item.isActive}}</p>
             <p>Tags:
               <ul>
-                <li v-for="tag in tags">{{tag.name}}</li>
+                <li v-for="tag in item.tags">{{tag}}</li>
               </ul>
             </p>
           </td>
@@ -106,7 +106,7 @@ export default {
       return `<div class="has-text-centered">${item.upvoteCount}</div>`;
     },
     renderCategory(item) {
-      return item.category ? item.category.name : "";
+      return item.category ? item.category : "";
     },
     toggleMore(item) {
       const showMore = item.showMore;

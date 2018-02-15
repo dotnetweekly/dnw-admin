@@ -7,10 +7,8 @@
       <router-link class="nav-item is-tab" to="/" exact>Home</router-link>
       <router-link class="nav-item is-tab" to="/links">Links</router-link>
       <router-link class="nav-item is-tab" to="/comments">Comments</router-link>
-      <router-link class="nav-item is-tab" to="/categories">Categories</router-link>
       <router-link class="nav-item is-tab" to="/users">Users</router-link>
-      <router-link class="nav-item is-tab" to="/tags">Tags</router-link>
-      <router-link class="nav-item is-tab" to="/newsletters">Nesletters</router-link>
+      <router-link class="nav-item is-tab" to="/newsletters">Newsletters</router-link>
       <router-link class="nav-item is-tab" to="/emails">Emails</router-link>
       <router-link class="nav-item is-tab" to="/ads">Ads</router-link>
       <router-link class="nav-item is-tab" to="/login">Logout</router-link>
