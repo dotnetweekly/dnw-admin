@@ -28,9 +28,10 @@ const service = {
     });
   },
   deleteItems({ ids, link }) {
+    console.log(ids, link);
     return new Promise((resolve, reject) => {
       axios
-        .delete(`/comments/`, { data: { ids } })
+        .delete(`/comments/?linkId=${link}`, { data: { ids } })
         .then(response => {
           resolve(response.data);
         })

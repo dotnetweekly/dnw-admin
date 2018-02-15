@@ -20,7 +20,7 @@ export default {
       request
       .post("/emails/newsletter/current", {save: true})
       .then(response => {
-        console.log(response);
+        // console.log(response);
       })
       .catch(error => {
         console.log(error);
