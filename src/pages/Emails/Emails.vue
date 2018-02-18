@@ -1,6 +1,9 @@
 <template>
   <div>
     <ul>
+        <li>
+          <router-link to="/emails/new">New</router-link>
+        </li>
       <li>
         <router-link to="/emails/newsletter-current">Newsletter Current</router-link>
       </li>

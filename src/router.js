@@ -19,6 +19,7 @@ const Newsletters = () => System.import('./pages/Newsletters/NewsletterList.vue'
 const NewslettersUpdate = () => System.import('./pages/Newsletters/NewsletterUpdate.vue');
 
 const Emails = () => System.import('./pages/Emails/Emails.vue');
+const EmailNew = () => System.import('./pages/Emails/New.vue');
 const EmailNewsletterCurrent = () => System.import('./pages/Emails/NewsletterCurrent.vue');
 const EmailNewsletterRegistered = () => System.import('./pages/Emails/NewsletterRegistered.vue');
 
@@ -58,6 +59,7 @@ const router = new VueRouter({
 		{ path: '/newsletters/edit/:id', component: NewslettersUpdate },
 
 		{ path: '/emails', component: Emails },
+		{ path: '/emails/new', component: EmailNew },
 		{ path: '/emails/newsletter-current', component: EmailNewsletterCurrent },
 		{ path: '/emails/newsletter-registered', component: EmailNewsletterRegistered },
 

@@ -31,4 +31,8 @@
     width: 800px;
     height: 800px;
   }
+  .paging li{
+    list-style-type: none;
+    float: left;
+  }
 </style>

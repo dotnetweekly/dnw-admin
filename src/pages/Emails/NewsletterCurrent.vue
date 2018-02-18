@@ -1,15 +1,26 @@
 <template>
   <div class="has-text-centered">
     <div style="width:800px;display: inline-block;text-align: left;">
-      <button v-on:click="save()" class="button is-primary is-pulled-right">Generate!</button>
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column"></div>
+        <div class="column"></div>
+        <div class="column">
+          <button v-on:click="save()" class="button is-primary is-pulled-right">Generate!</button>
+        </div>
+        <div class="column">
+          <button v-on:click="send()" class="button is-primary is-pulled-right">Send</button>
+        </div>
+      </div>
+      <div class="is-clearfix"></div>
+      <a v-on:click="changeSize('desktop')">Desktop Size</a>
+      <a v-on:click="changeSize('tablet')">Tablet Size</a>
+      <a v-on:click="changeSize('mobile')">Mobile Size</a>
+      <div class="is-clearfix"></div>
+      <iframe class="newsletter-desktop-preview" id="newsletter-iframe"></iframe>
     </div>
-    <div class="is-clearfix"></div>
-    <a v-on:click="changeSize('desktop')">Desktop Size</a>
-    <a v-on:click="changeSize('tablet')">Tablet Size</a>
-    <a v-on:click="changeSize('mobile')">Mobile Size</a>
-    <div class="is-clearfix"></div>
-    <iframe class="newsletter-desktop-preview" id="newsletter-iframe"></iframe>
   </div>
+</div>
 </template>
 <script>
 import request from "../../request";

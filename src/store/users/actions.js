@@ -1,9 +1,9 @@
 import appService from "../../services/users.service";
 
 const actions = {
-  getItems(context) {
+  getItems(context, params) {
     context.state.users = [];
-    appService.getItems({ page: 1 }).then(payload => {
+    appService.getItems({ page: params.page }).then(payload => {
       context.commit("loadItems", payload.data);
     });
   },

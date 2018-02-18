@@ -28,6 +28,11 @@
         </tr>
       </tbody>
     </dnw-table>
+    <ul class="paging">
+      <li v-for="p in pageArr">
+        <a v-on:click="setPage(p)">{{p}}</a>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -58,12 +63,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("userModule", ["users"]),
+    ...mapGetters("userModule", ["users", "page", "pages"]),
     itemsLength() {
       return this.users.length;
     },
     idCount() {
       return this.ids.length;
+    },
+    pageArr() {
+      const arr = [];
+      for(var i = 1; i<=this.pages; i++){
+        arr.push(i);
+      }
+      return arr;
     }
   },
   methods: {
@@ -115,11 +127,14 @@ export default {
           prop: "subscribed"
         }
       ];
+    },
+    setPage(p) {
+      this.getItems({page: p});
     }
   },
   mounted() {
     Vue.set(this.$refs.dnwTable, "columns", this.getColumns());
-    this.getItems();
+    this.getItems({page: this.page});
   }
 };
 </script>

@@ -1,6 +1,8 @@
 const mutations = {
-  loadItems(state, items) {
-    state.users = items;
+  loadItems(state, params) {
+    state.users = params.items;
+    state.page = params.page;
+    state.pages = params.pages;
   }
 };
 

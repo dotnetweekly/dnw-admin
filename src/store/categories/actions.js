@@ -23,7 +23,6 @@ const actions = {
     });
   },
   deleteItems(context, ids) {
-    console.log(ids);
     appService.deleteItems(ids).then(payload => {
       if (payload.success) {
         context.commit("loadCategories", payload.data);
