@@ -22,7 +22,7 @@
           <button v-on:click="save()" class="button is-pulled-right">Generate!</button>
         </div>
         <div class="column">
-          <button v-on:click="save()" class="button is-pulled-right">Send Admin</button>
+          <button v-on:click="sendAdmin()" class="button is-pulled-right">Send Admin</button>
         </div>
         <div class="column">
           <button v-on:click="send()" class="button is-primary is-pulled-right">Send</button>
@@ -62,7 +62,17 @@ export default {
       request
       .post("/emails/newsletter/sendNewsletter", {subject: this.subject})
       .then(response => {
-        // console.log(response);
+          alert(`Sent to ${response.data.data.usersCount}!`);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    sendAdmin() {
+      request
+      .post("/emails/newsletter/sendNewsletter?onlyAdmin=true", {subject: this.subject})
+      .then(response => {
+          alert(`Sent to ${response.data.data.usersCount}!`);
       })
       .catch(error => {
         console.log(error);

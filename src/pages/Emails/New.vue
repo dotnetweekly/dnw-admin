@@ -78,6 +78,13 @@
               </div>
               <div class="field">
                 <div class="control">
+                  <button class="button" v-on:click="sendAdmin()">
+                    Send admin
+                  </button>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
                   <button class="button is-primary" v-on:click="send()">
                     Send message
                   </button>
@@ -134,7 +141,13 @@
       send() {
         axios.post(`${config.api}/emails/custom`, this.emailData)
         .then((response) => {
-          alert("Sent!");
+          alert(`Sent to ${response.data.data.usersCount}!`);
+        })
+      },
+      sendAdmin() {
+        axios.post(`${config.api}/emails/custom?onlyAdmin=true`, this.emailData)
+        .then((response) => {
+          alert(`Sent to ${response.data.data.usersCount}!`);
         })
       }
     },
