@@ -50,7 +50,7 @@
       <v-select
         v-model="item.user"
         :debounce="250"
-        :on-search="getOptions"
+        :on-search="debounceUsers"
         :options="filterUsers"
         placeholder="Search Users.."
         label="email"
@@ -95,6 +95,7 @@ import { mapGetters, mapActions } from "vuex";
 import vSelect from "vue-select";
 import service from "../../services/links.service";
 import axios from "axios";
+import debounce from "debounce";
 
 export default {
   components: { vSelect },
@@ -137,14 +138,16 @@ export default {
     saveItem() {
       this.updateItem(this.item);
     },
+    debounceUsers: debounce(function (e, loading) {
+      this.getOptions(e, loading);
+    }, 1500),
     getOptions(search, loading) {
       loading(true);
       axios
-        .get("users", {
-          q: search
-        })
+        .get(`users?email=${search}`)
         .then(resp => {
-          this.filterUsers = resp.data.data;
+          console.log(resp.data.data.items);
+          this.filterUsers = resp.data.data.items;
           loading(false);
         });
     }
