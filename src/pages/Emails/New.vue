@@ -2,10 +2,10 @@
   <div class="has-text-centered">
       <div>
         Params:
-        <span>{{ "${USER_USERNAME}" }}</span>,
-        <span>{{ "${USER_RESET}" }}</span>,
-        <span>{{ "${USER_UNSUBSCRIBE}" }}</span>,
-        <span>{{ "${USER_FISTNAME}" }}</span>
+        <span v-html="'{{USER_USERNAME}}'"></span>,
+        <span v-html="'{{{USER_RESET}}}'"></span>,
+        <span v-html="'{{{USER_UNSUBSCRIBE}}}'"></span>,
+        <span v-html="'{{USER_FISTNAME}}'"></span>
       </div>
       <div class="field is-horizontal">
         <div class="field-label is-normal">

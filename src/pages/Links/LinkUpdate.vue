@@ -146,7 +146,6 @@ export default {
       axios
         .get(`users?email=${search}`)
         .then(resp => {
-          console.log(resp.data.data.items);
           this.filterUsers = resp.data.data.items;
           loading(false);
         });
