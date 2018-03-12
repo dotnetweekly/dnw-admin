@@ -22,6 +22,8 @@ const Emails = () => System.import('./pages/Emails/Emails.vue');
 const EmailNew = () => System.import('./pages/Emails/New.vue');
 const EmailNewsletterCurrent = () => System.import('./pages/Emails/NewsletterCurrent.vue');
 const EmailNewsletterRegistered = () => System.import('./pages/Emails/NewsletterRegistered.vue');
+const EmailForgotPassword = () => System.import('./pages/Emails/ForgotPassword.vue');
+const EmailUpdateEmail = () => System.import('./pages/Emails/UpdateEmail.vue');
 
 const Ads = () => System.import('./pages/Ads/AdsList.vue');
 const AdsUpdate = () => System.import('./pages/Ads/AdsUpdate.vue');
@@ -62,6 +64,8 @@ const router = new VueRouter({
 		{ path: '/emails/new', component: EmailNew },
 		{ path: '/emails/newsletter-current', component: EmailNewsletterCurrent },
 		{ path: '/emails/newsletter-registered', component: EmailNewsletterRegistered },
+		{ path: '/emails/forgot-password', component: EmailForgotPassword },
+		{ path: '/emails/update-email', component: EmailUpdateEmail },
 
 		{ path: '/ads', component: Ads },
 		{ path: '/ads/add', component: AdsUpdate },
