@@ -1,5 +1,5 @@
 npm install
-npm install --only=dev
+# npm install --only=dev
 
 sed -i 's/http:\/\/localhost:3000/https:\/\/dnw-api.azurewebsites.net/g' ./src/config.js
 sed -i 's/http:\/\/localhost:5000/https:\/\/www.dotnetweekly.com/g' ./src/config.js
