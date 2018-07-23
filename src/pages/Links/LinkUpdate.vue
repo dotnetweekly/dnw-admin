@@ -54,6 +54,7 @@
         :options="filterUsers"
         placeholder="Search Users.."
         label="email"
+        :value="item.user.id"
       >
       </v-select>
     </div>
@@ -62,6 +63,13 @@
       <label class="label">Content</label>
       <div class="control">
         <textarea class="textarea" v-model="item.content" placeholder="Textarea"></textarea>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">isPayed</label>
+      <div class="control">
+        <input class="checkbox" v-model="item.isPayed" type="checkbox" placeholder="Text input">
       </div>
     </div>
 
@@ -115,6 +123,8 @@ export default {
         category: "",
         user: "",
         isActive: true,
+        isPayed: false,
+        clickedTimes: 0,
         upvotes: 0,
         tags: []
       }
