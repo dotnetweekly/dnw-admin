@@ -21,7 +21,8 @@
     "vue": "^2.4.2",
     "vue-router": "^2.7.0",
     "vue-select": "^2.3.1",
-    "vuex": "^2.4.0"
+    "vuex": "^2.4.0",
+    "weekly-calendar-helper": "^0.0.5"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

@@ -1,4 +1,4 @@
-rm -rf node_modules
+#rm -rf node_modules
 npm install
 npm install --only=dev
 
@@ -14,5 +14,5 @@ cp -R ./server.js ../wwwroot/server.js
 cp -R ./package.json ../wwwroot/package.json
 
 cd ../wwwroot
-rm -rf node_modules
+#rm -rf node_modules
 npm install --only=production

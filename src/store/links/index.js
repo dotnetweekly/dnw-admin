@@ -1,8 +1,8 @@
 import actions from './actions';
 import mutations from './mutations';
-import * as calendarHelper from '../../helpers/calendar';
+import weeklyCalendarHelper from "weekly-calendar-helper"
 
-const now = calendarHelper.getUtcNow();
+const now = weeklyCalendarHelper.baseHelper.getUtcNow();
 const state = {
 	links: [],
 	filter: {
