@@ -4,7 +4,7 @@ const service = {
   getItems(page) {
     return new Promise((resolve, reject) => {
       axios
-        .get("/users", {page: page})
+        .get(`/users?page=${page ? page.page : 1}`, page)
         .then(response => {
           resolve(response.data);
         })
