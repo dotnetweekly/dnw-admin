@@ -1,5 +1,5 @@
 module.exports = {
-  api: "http://localhost:3000/api/v1/admin",
-  newsletter: "http://localhost:6100/",
-  client: "http://localhost:5000/"
+  api: "https://dnw-api.azurewebsites.net/api/v1/admin",
+  newsletter: "https://dnw-newsletter.azurewebsites.net/",
+  client: "https://www.dotnetweekly.com/"
 };
